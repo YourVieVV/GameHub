@@ -211,9 +211,9 @@ export default function SudokuGame() {
         <View style={styles.header}>
           <Text style={styles.title}>SUDOKU</Text>
           <View style={styles.btnRow}>
-            <TouchableOpacity style={[styles.actionBtn, { backgroundColor: '#FF4757' }]} onPress={triggerWinAnim}>
-              <Text style={styles.btnText}>TEST</Text>
-            </TouchableOpacity>
+            {/*<TouchableOpacity style={[styles.actionBtn, { backgroundColor: '#FF4757' }]} onPress={triggerWinAnim}>*/}
+            {/*  <Text style={styles.btnText}>TEST</Text>*/}
+            {/*</TouchableOpacity>*/}
             <TouchableOpacity style={styles.actionBtn} onPress={clearSelectedCell}>
               <Text style={styles.btnText}>СБРОС</Text>
             </TouchableOpacity>

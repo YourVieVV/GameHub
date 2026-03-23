@@ -17,7 +17,7 @@ const GAMES: Game[] = [
   { id: '5', title: 'Пятнашки', description: 'Slide Puzzle', icon: LayoutGrid, route: '/games/fifteen', color: '#2E97FF' },
   { id: '6', title: 'Антистресс', description: 'PopIt', icon: Smile, route: '/games/popIt', color: '#F87171' },
   { id: '7', title: 'Пасьянс «13»', description: 'Royal Cards', icon: Spade, route: '/games/solitaire', color: '#FB923C' },
-  { id: '8', title: 'Японская головоломка', description: 'Sudoku', icon: Focus, route: '/games/sudoku', color: '#8d8fff' },
+  { id: '8', title: 'Судоку', description: 'Sudoku', icon: Focus, route: '/games/sudoku', color: '#8d8fff' },
 ];
 
 export default function GamesList() {

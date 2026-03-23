@@ -159,9 +159,9 @@ export default function FifteenGame() {
       <View style={styles.header}>
         <Text style={styles.title}>15 PUZZLE</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity style={styles.testBtn} onPress={triggerWinAnim}>
-            <Text style={styles.testBtnText}>TEST</Text>
-          </TouchableOpacity>
+          {/*<TouchableOpacity style={styles.testBtn} onPress={triggerWinAnim}>*/}
+          {/*  <Text style={styles.testBtnText}>TEST</Text>*/}
+          {/*</TouchableOpacity>*/}
           <View style={styles.scoreBadge}>
             <Text style={styles.scoreText}>MOVES: {moves}</Text>
           </View>

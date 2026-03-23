@@ -56,7 +56,7 @@ export default function HistoryScreen() {
       icon: Spade
     },
     [NamesForDB.sudoku]: {
-      name: 'Японская головоломка',
+      name: 'Судоку',
       textScore: TextHist.res,
       icon: Focus
     },

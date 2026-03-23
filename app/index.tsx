@@ -31,7 +31,7 @@ export default function MainMenu() {
     );
 
       // Скрывает панель и переводит в режим "погружения" (пропадает и статус-бар)
-      // NavigationBar.setVisibilityAsync("hidden");
+      NavigationBar.setVisibilityAsync("hidden");
 
       // Устанавливает поведение: панель появится при свайпе и сама скроется
       // NavigationBar.setBehaviorAsync("sticky-immersive");

@@ -8,7 +8,7 @@ import Animated, {
   withSpring,
   withSequence,
   withDelay,
-  runOnJS
+  runOnJS, cancelAnimation, useAnimatedRef, measure
 } from 'react-native-reanimated';
 import { useAudioPlayer } from 'expo-audio';
 import {useSounds} from "../../components/useSounds";
@@ -40,6 +40,14 @@ const Particle = ({ x, y, color }: { x: number, y: number, color: string }) => {
     ty.value = withTiming(Math.sin(angle) * dist, { duration: 800 });
     op.value = withTiming(0, { duration: 800 });
     scale.value = withTiming(0, { duration: 800 });
+
+    // ИЗМЕНЕНО: добавлена очистка анимаций при размонтировании компонента
+    return () => {
+      cancelAnimation(tx);
+      cancelAnimation(ty);
+      cancelAnimation(op);
+      cancelAnimation(scale);
+    };
   }, []);
 
   const style = useAnimatedStyle(() => ({
@@ -58,11 +66,12 @@ const Particle = ({ x, y, color }: { x: number, y: number, color: string }) => {
   return <Animated.View style={style} />;
 };
 
-const Card = ({ card, isAvailable, isSelected, onMatch, posX, posY, index, playSound }: any) => {
+const Card = ({ card, isAvailable, isSelected, onMatch, index, playSound }: any) => {
   const scale = useSharedValue(1);
   const flyAnim = useSharedValue(0);
   const shake = useSharedValue(0);
   const prevFrozen = useRef(card.isFrozen);
+  const cardRef = useAnimatedRef<Animated.View>();
 
   useEffect(() => {
     if (prevFrozen.current && !card.isFrozen) {
@@ -84,9 +93,10 @@ const Card = ({ card, isAvailable, isSelected, onMatch, posX, posY, index, playS
 
   const tap = Gesture.Tap().onEnd(() => {
     if (isAvailable && !card.isFrozen) {
+      const layout = measure(cardRef);
       scale.value = withSequence(withTiming(1.2, { duration: 100 }), withTiming(1, { duration: 100 }));
       runOnJS(playSound)();
-      runOnJS(onMatch)(card, posX, posY);
+      runOnJS(onMatch)(card, layout.pageX, layout.pageY);
     }
   });
 
@@ -115,7 +125,7 @@ const Card = ({ card, isAvailable, isSelected, onMatch, posX, posY, index, playS
 
   return (
     <GestureDetector gesture={tap}>
-      <Animated.View style={animatedStyle}>
+      <Animated.View style={animatedStyle} ref={cardRef}>
         <Text style={[styles.rank, { color: card.isFrozen ? '#4682B4' : ((card.suit === '♥' || card.suit === '♦') ? '#FF4757' : '#000') }]}>
           {card.rank}
         </Text>
@@ -237,7 +247,7 @@ export default function PyramidGame() {
   };
 
   const handleMatch = (card: any, x: number, y: number) => {
-    const cardColor = (card.suit === '♥' || card.suit === '♦') ? '#FF4757' : '#000';
+    const cardColor = (card.suit === '♥' || card.suit === '♦') ? '#353ac9' : '#FF4757';
     const processMatch = (ids: string[], r?: number, c?: number, r2?: number, c2?: number) => {
       setRemovedIds(prev => new Set([...prev, ...ids]));
       setDeck(curr => {
@@ -303,7 +313,7 @@ export default function PyramidGame() {
   }, []);
 
   const createExplosion = (x: number, y: number, color: string) => {
-    const newP = Array.from({ length: 12 }).map(() => ({ id: Math.random(), x: x + CARD_W / 2, y: y + CARD_H / 2, color }));
+    const newP = Array.from({ length: 20 }).map(() => ({ id: Math.random(), x: x + 20, y: y - 60, color }));
     setParticles(prev => [...prev, ...newP]);
     setTimeout(() => setParticles(prev => prev.filter(p => !newP.includes(p))), 1000);
   };
@@ -331,7 +341,7 @@ export default function PyramidGame() {
       <View style={styles.header}>
         <Text style={styles.title}>ПИРАМИДА 13</Text>
         <View style={{ flexDirection: 'row' }}>
-          <Pressable onPress={testWin} style={[styles.btn, { marginRight: 10, backgroundColor: '#FF4757' }]}><Text style={styles.btnText}>TEST WIN</Text></Pressable>
+          {/*<Pressable onPress={testWin} style={[styles.btn, { marginRight: 10, backgroundColor: '#FF4757' }]}><Text style={styles.btnText}>TEST WIN</Text></Pressable>*/}
           <Pressable onPress={shuffleGame} style={[styles.btn, { marginRight: 10, backgroundColor: '#FF9F43' }]}><Text style={styles.btnText}>ПЕРЕТАСОВАТЬ</Text></Pressable>
           <Pressable onPress={initGame} style={styles.btn}><Text style={styles.btnText}>НОВАЯ РАЗДАЧА</Text></Pressable>
         </View>
@@ -344,7 +354,7 @@ export default function PyramidGame() {
           const absY = t + 120;
           return (
             <View key={card.id} style={{ position: 'absolute', left: l, top: t }}>
-              <Card card={card} isAvailable={checkAvailable(card)} isSelected={selectedId === card.id} onMatch={handleMatch} posX={l} posY={absY} index={i} playSound={cartTouchFlipSound} />
+              <Card card={card} isAvailable={checkAvailable(card)} isSelected={selectedId === card.id} onMatch={handleMatch} index={i} playSound={cartTouchFlipSound} />
             </View>
           );
         })}
@@ -356,7 +366,7 @@ export default function PyramidGame() {
           const t = height - 170;
           return (
             <View key={c.id} style={{ marginLeft: i ? 10 : 0 }}>
-              <Card card={c} isAvailable={true} isSelected={selectedId === c.id} onMatch={handleMatch} posX={l} posY={t} index={28 + i} playSound={cartTouchFlipSound} />
+              <Card card={c} isAvailable={true} isSelected={selectedId === c.id} onMatch={handleMatch} index={28 + i} playSound={cartTouchFlipSound} />
             </View>
           );
         })}
