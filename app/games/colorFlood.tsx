@@ -263,7 +263,7 @@ export default function ColorFlood() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View>
-          <Text style={styles.title}>COLOR FLOOD</Text>
+          <Text style={styles.title}>ЦВЕТОВАЯ ЗАЛИВКА</Text>
           <Text style={styles.levelSub}>LEVEL {level} ({gridSize}x{gridSize})</Text>
         </View>
         <View style={styles.movesBadge}>
@@ -340,7 +340,7 @@ export default function ColorFlood() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#1a1a1a', alignItems: 'center' },
   header: { width: '90%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 30 },
-  title: { color: '#fff', fontSize: 28, fontWeight: '900', letterSpacing: 1 },
+  title: { color: '#fff', fontSize: 22, fontWeight: '900', letterSpacing: 1 },
   levelSub: { color: '#00BFFF', fontWeight: '900', fontSize: 14, letterSpacing: 2 },
   movesBadge: { backgroundColor: '#333', paddingHorizontal: 15, paddingVertical: 8, borderRadius: 12, borderWidth: 2, borderColor: '#444' },
   movesText: { color: '#00FF88', fontWeight: '900', fontSize: 18 },

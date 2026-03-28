@@ -247,7 +247,7 @@ export default function PyramidGame() {
   };
 
   const handleMatch = (card: any, x: number, y: number) => {
-    const cardColor = (card.suit === '♥' || card.suit === '♦') ? '#353ac9' : '#FF4757';
+    const cardColor = (card.suit === '♥' || card.suit === '♦') ? '#525252' : '#FF4757';
     const processMatch = (ids: string[], r?: number, c?: number, r2?: number, c2?: number) => {
       setRemovedIds(prev => new Set([...prev, ...ids]));
       setDeck(curr => {
@@ -405,7 +405,7 @@ export default function PyramidGame() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#1a1a1a' },
-  header: { marginTop: 40, paddingHorizontal: 20, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' },
+  header: { marginTop: 20, paddingHorizontal: 20, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', gap:10 },
   title: { color: '#FFF', fontSize: 28, fontWeight: '900', letterSpacing: 2 },
   btn: { backgroundColor: '#2E97FF', padding: 10, borderRadius: 8, borderWidth: 2, borderColor: '#000' },
   btnText: { fontWeight: '900' },
