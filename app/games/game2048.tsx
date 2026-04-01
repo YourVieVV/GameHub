@@ -42,7 +42,7 @@ export default function Game2048() {
   const CELL_SIZE = Math.floor((width - 40 - (BOARD_PADDING * 2) - (CELL_MARGIN * (cols - 1))) / cols);
 
   useEffect(() => {
-    setHighScore(DatabaseService.getHighScore('2048'));
+    setHighScore(DatabaseService.getHighScore(NamesForDB.game2048));
     const savedBoard2048 = DatabaseService.getSetting('game2048_default', 'STANDARD') as SizeBoard;
     if (savedBoard2048 === 'INCREASED') setRows(5);
     initGame();
@@ -124,7 +124,10 @@ export default function Game2048() {
       setGrid([...newGrid, spawned]);
       setNextId(nextId + 1);
       setScore(newScore);
-      if (newScore > highScore) setHighScore(newScore);
+      if (newScore > highScore) {
+        DatabaseService.saveScore(NamesForDB.game2048, newScore);
+        setHighScore(newScore);
+      }
     } else if (newGrid.length === rows * cols) {
       checkGameOver();
     }

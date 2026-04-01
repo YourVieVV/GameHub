@@ -48,10 +48,10 @@ export const DatabaseService = {
 
   getHighScore: (gameId: string): number => {
     const result = db.getFirstSync<{ score: number }>(
-      'SELECT MAX(score) as score FROM scores WHERE game_id = ?',
+      'SELECT COALESCE(MAX(score), 0) as score FROM scores WHERE game_id = ?',
       [gameId]
     );
-    return result?.score || 0;
+    return result?.score ?? 0;
   },
 
   getMinScore: (gameId: string): number => {

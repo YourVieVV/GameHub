@@ -25,8 +25,6 @@
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "android.permission.RECORD_AUDIO",
-        "android.permission.MODIFY_AUDIO_SETTINGS",
-        "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
       "package": "com.valeriypomytkin.MyGamesHub"
@@ -49,6 +47,15 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "expo-navigation-bar": {
+        "visibility": "hidden"
+      },
+      "eas": {
+        "projectId": "688a62c4-16ee-44bb-8822-3415c464981e"
+      }
     }
   }
 }

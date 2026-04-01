@@ -30,11 +30,11 @@ export default function MainMenu() {
       false
     );
 
-      // Скрывает панель и переводит в режим "погружения" (пропадает и статус-бар)
-      NavigationBar.setVisibilityAsync("hidden");
+    // Скрывает панель и переводит в режим "погружения" (пропадает и статус-бар)
+    NavigationBar.setVisibilityAsync("hidden");
 
-      // Устанавливает поведение: панель появится при свайпе и сама скроется
-      // NavigationBar.setBehaviorAsync("sticky-immersive");
+    // Устанавливает поведение: панель появится при свайпе и сама скроется
+    // NavigationBar.setBehaviorAsync("sticky-immersive");
 
     const savedMusic = DatabaseService.getSetting('music_enabled', 'true');
     savedMusic === 'true' && start();
