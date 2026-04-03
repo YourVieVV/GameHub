@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import * as NavigationBar from 'expo-navigation-bar';
-import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import {Link} from 'expo-router';
-import { Play, Settings, Gamepad2, History, Trophy } from 'lucide-react-native';
+import { Play, Settings, Gamepad2, Trophy } from 'lucide-react-native';
 import Animated, {
   FadeInDown,
   FadeInUp,
@@ -32,9 +32,6 @@ export default function MainMenu() {
 
     // Скрывает панель и переводит в режим "погружения" (пропадает и статус-бар)
     NavigationBar.setVisibilityAsync("hidden");
-
-    // Устанавливает поведение: панель появится при свайпе и сама скроется
-    // NavigationBar.setBehaviorAsync("sticky-immersive");
 
     const savedMusic = DatabaseService.getSetting('music_enabled', 'true');
     savedMusic === 'true' && start();
