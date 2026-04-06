@@ -103,7 +103,7 @@ export default function MainMenu() {
       </Animated.View>
 
       <View style={styles.footer}>
-        <Text style={versionStyles.versionText}>v 1.0.0 • GAME HUB EDITION</Text>
+        <Text style={versionStyles.versionText}>v 1.0.1 • GAME HUB EDITION</Text>
       </View>
     </View>
   );

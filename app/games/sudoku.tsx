@@ -54,7 +54,7 @@ export default function SudokuGame() {
     setIsWon(false);
     winAnim.value = 0;
     scoreAnim.value = 0;
-    const holes = savedDiff === EASY ? 30 : savedDiff === MEDIUM ? 40 : 50;
+    const holes = savedDiff === EASY ? 20 : savedDiff === MEDIUM ? 30 : 40;
     const newGrid = Array(9).fill(null).map(() => Array(9).fill(0));
 
     for (let i = 0; i < 9; i += 3) fillBox(newGrid, i, i);

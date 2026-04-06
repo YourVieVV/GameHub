@@ -199,7 +199,7 @@ export default function PyramidGame() {
   };
 
   const triggerWin = () => {
-    DatabaseService.saveScore(NamesForDB.rockClimber, currScore + 100);
+    DatabaseService.saveScore(NamesForDB.solitaire, currScore + 100);
     setIsWon(true);
 
     winAnim.value = withSequence(
