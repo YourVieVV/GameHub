@@ -157,6 +157,7 @@ export default function PyramidGame() {
   const cartWinSound = useSounds(soundWin);
 
   const initGame = () => {
+    setCurrScore(DatabaseService.getScore(NamesForDB.solitaire));
     setIsWon(false);
     winAnim.value = 0;
     scoreAnim.value = 0;
@@ -174,9 +175,9 @@ export default function PyramidGame() {
         newDeck[idx].col = c;
         // Шанс появления ледяной карты
         let coefficient;
-        if (currScore > 200 && currScore <= 600) coefficient = 0.09;
-        if (currScore > 600 && currScore <= 1000) coefficient = 0.08;
-        if (currScore > 1000) coefficient = 0.07;
+        if (currScore > 100 && currScore <= 500) coefficient = 0.09;
+        if (currScore > 500 && currScore <= 900) coefficient = 0.08;
+        if (currScore > 900) coefficient = 0.07;
 
         if (r > 0 && (coefficient && (Math.random() < coefficient))) {
           newDeck[idx].isFrozen = true;
@@ -307,7 +308,6 @@ export default function PyramidGame() {
 
   useEffect(() => {
     initGame();
-    setCurrScore(DatabaseService.getScore(NamesForDB.solitaire));
     const isShowRules = DatabaseService.getSetting('rules_enabled', 'true');
     setShowRules(isShowRules === 'true');
   }, []);
