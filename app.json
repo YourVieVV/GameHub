@@ -2,7 +2,7 @@
   "expo": {
     "name": "Сборник игр",
     "slug": "MyGamesHub",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/play.png",
     "scheme": "mygameshub",
